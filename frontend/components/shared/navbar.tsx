@@ -1,3 +1,4 @@
+"use client";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -15,11 +16,15 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Navbar() {
+  const { isAuthenticated } = useAuth();
   return (
+    // TODO: Make the navbar responsive
     <header className="m-4 p-1 border border-blue-600/20 rounded-2xl">
-      <div className="flex items-center justify-between px-4 py-2 border border-blue-600/20 rounded-xl bg-white">
+      <div className="flex items-center justify-between px-2.5 py-2 border border-blue-600/20 rounded-xl bg-white">
         <div className="flex items-center gap-8">
           <div className="flex items-center">
             <Image src={brandLogo} alt="Brand Logo" />
@@ -56,26 +61,32 @@ export default function Navbar() {
           </NavigationMenu>
         </div>
         <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>
-                  <User />
-                </AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="border border-blue-600/20"
-            >
-              <Link href="/logout">
-                <DropdownMenuItem className="text-destructive">
-                  Log out
-                </DropdownMenuItem>
-              </Link>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>
+                    <User />
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="end"
+                className="border border-blue-600/20"
+              >
+                <Link href="/logout">
+                  <DropdownMenuItem className="text-destructive">
+                    Log out
+                  </DropdownMenuItem>
+                </Link>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link href="/login">
+              <Button>Log in</Button>
+            </Link>
+          )}
         </div>
       </div>
     </header>
