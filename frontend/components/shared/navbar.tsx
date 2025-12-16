@@ -23,43 +23,35 @@ export default function Navbar() {
   const { isAuthenticated } = useAuth();
   return (
     // TODO: Make the navbar responsive
-    <header className="m-4 p-1 border border-blue-600/20 rounded-2xl">
-      <div className="flex items-center justify-between px-2.5 py-2 border border-blue-600/20 rounded-xl bg-white">
-        <div className="flex items-center gap-8">
-          <div className="flex items-center">
-            <Image src={brandLogo} alt="Brand Logo" />
-            <h1 className="text-title font-bold">Finance</h1>
-          </div>
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="/overview">
-                  Overview
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="/transactions">
-                  Transactions
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="/accounts">
-                  Accounts
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="/categories">
-                  Categories
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="/settings">
-                  Settings
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+    <header className="m-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center border-2 border-blue-600 rounded-full h-12 w-[8vw]">
+          <Image src={brandLogo} alt="Brand Logo" className="size-8" />
+          <h1 className="text-fluid-title font-semibold">Fintrack</h1>
         </div>
+        <NavigationMenu className="border-2 border-blue-600 rounded-full px-4 h-12">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/overview">Overview</NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/transactions">
+                Transactions
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/accounts">Accounts</NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/categories">
+                Categories
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/settings">Settings</NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
         <div>
           {isAuthenticated ? (
             <DropdownMenu>
@@ -84,7 +76,9 @@ export default function Navbar() {
             </DropdownMenu>
           ) : (
             <Link href="/login">
-              <Button>Log in</Button>
+              <Button className="rounded-full h-12 w-[8vw]">
+                Log in
+              </Button>
             </Link>
           )}
         </div>
